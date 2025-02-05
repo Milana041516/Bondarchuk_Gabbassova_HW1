@@ -45,9 +45,31 @@
             <h2 class="hidden">Banner Image</h2>
         </section>
 
-        <section id="characters" class="section-movies">
+        <section id="characters" class="section-movies grid-con">
             <h2 class="hidden">Characters & Movies</h2>
-            <h3><img class="heading" src="images/movies-text.svg" alt="heading"></h3>
+            <h3 class="col-span-full"><img class="heading" src="images/characters-text.svg" alt="heading"></h3>
+
+            <div id="character-box" class=" col-span-full">
+                <div class="character">
+                    <a href="#"><img src="images/1.jpg" alt="character-image"></a>
+                    <p>Character Name</p>
+                </div>
+            </div>
+
+            <h3 class="col-span-full"><img class="heading" src="images/movies-text.svg" alt="heading"></h3>
+
+            <div class="col-span-full">
+                <div id="film-con">
+
+                </div>
+                <template id="film-template">
+                    <section>
+                        <img src="images/1.png" alt="film" class="film-image">
+                        <h3 class="film-title"></h3>
+                        <p class="film-description"></p>
+                    </section>
+                </template>
+            </div>
         </section>
 
         <section id="statistics" class="section-statistics">

@@ -58,3 +58,84 @@
     })
     })
 })();
+
+//SWAPI API
+(() => {
+    const characterBox = document.querySelector('#character-box');
+    const baseURL = "https://swapi.dev/api/";
+
+    const filmTemplate = document.querySelector("#film-template");
+    const filmCon = document.querySelector("#film-con");
+
+    function getCharacters() {
+        fetch(`${baseURL}people`)
+        .then(response => response.json())
+        .then(function(response) {
+            console.log(response);
+
+            const characters = response.results;
+
+            
+            characters.forEach(character => {
+                const characterDiv = document.createElement("div");
+                characterDiv.classList.add("character");
+
+                const a = document.createElement("a");
+
+                //get an ID from url for the images for characters
+                const img = document.createElement("img");
+                const parts = character.url.split("/");
+                const id = parts[parts.length - 2];
+
+                img.src = `images/${id}.jpg`;
+
+                // p tag(names of the characters)
+                const p = document.createElement("p");
+                p.textContent = character.name;
+
+                //a tag
+                a.dataset.films = character.films.join(",");
+
+                a.appendChild(img);
+                characterDiv.appendChild(a);
+                characterDiv.appendChild(p);
+                characterBox.appendChild(characterDiv);
+            });
+        })
+        .then(function() {
+            const links = document.querySelectorAll(".character a")
+            console.log(links);
+
+            links.forEach(function(link) {
+                link.addEventListener("click", getMovies);
+            })
+        })
+        .catch()
+    }
+
+    function getMovies(e) {
+        e.preventDefault();
+        const movieID = e.currentTarget.dataset.films;
+
+        fetch(`${baseURL}films`)
+        .then(response => response.json())
+        .then(function(response){
+            filmCon.innerHTML = "";
+            console.log(response);
+            const clone = filmTemplate.content.cloneNode(true);
+            const filmImg = clone.querySelector(".film-image");
+            const filmTitle = clone.querySelector(".film-title");
+            const filmDescription = clone.querySelector(".film-description");
+
+            filmImg.src = `images/${response.episode_id}.png`;
+            filmTitle.innerHTML = response.results.title;
+            filmDescription.innerHTML = response.results.opening_crawl;
+
+            filmCon.appendChild(clone);
+
+        })
+        .catch()
+    }
+
+    getCharacters();
+})();
