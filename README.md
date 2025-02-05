@@ -52,8 +52,8 @@ Open index.html in the browser of your choice.
 February 5, 2025
 
 ## Credits
-Milana Gabbassova
-Dina Bondarchuk
+* Milana Gabbassova
+* Dina Bondarchuk
 
 ## License
 MIT License
