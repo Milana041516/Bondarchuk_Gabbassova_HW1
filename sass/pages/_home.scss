@@ -4,6 +4,12 @@ main {
     overflow: hidden;
 }
 
+.heading {
+    margin: 25px auto;
+    text-align: center;
+    display: flex;
+}
+
 .section-main {
     margin: 0;
     padding: 0;
@@ -15,14 +21,91 @@ main {
     background-repeat: no-repeat;
 }
 
-.section-statistics {
+.statistic-boxes-container {
+    margin-top: 50px;
     display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
     justify-content: center;
+    text-align: center;
 
+    .box-statistics {
+        text-align: center;
+        width: 200px;
+        height: 180px;
+        background-color: v.$secondary-color;
+        border-radius: 20px;
+    
+        .box-statistics-heading {
+            font-size: 24px;
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+
+        .box-statistics-text {
+            font-size: 12px;
+        }
+    }
 }
 
-.box-statistics {
-    background-color: v.$secondary-color;
-    width: 165px;
-    height: 170px;
+
+.section-faq {
+    padding: 20px 10px;
+    margin: 30px auto;
+    color: v.$secondary-color;
+
+    .faq {
+        margin-top: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 3px solid v.$secondary-color;
+        cursor: pointer;
+    }
+
+    .question {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .question h3 {
+        font-size: 1.5rem;
+    }
+
+    .answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 1s ease;
+    }
+
+    .answer p {
+        padding-top: 1rem;
+        line-height: 1.6;
+        font-size: 1.2rem;
+        color: #ffe91fb1;
+    }
+
+    .faq.openFaq .answer {
+        max-height: 300px;
+        animation: fade 1s ease-in-out;
+    }
+
+    .faq.openFaq svg {
+        transform: rotate(180deg);
+    }
+
+    svg {
+        transition: transform 0.5s ease-in;
+    }
+
+    @keyframes fade {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+    }
 }
