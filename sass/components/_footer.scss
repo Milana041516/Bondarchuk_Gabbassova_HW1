@@ -1,0 +1,147 @@
+@use '../abstracts/variables' as v;
+
+footer {
+    background-color: v.$primary-color;
+    color: white;
+    align-items: center;
+
+    .section-footer {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin: 30px;
+
+        .footer-logo {
+            img {
+                width: 100vw;
+            }
+        }
+
+        .footer-social-media {
+            margin-top: 20px;
+            p {
+                font-size: 25px;
+                font-weight: normal;
+            }
+
+            .social-media-icons {
+                display: flex;
+                gap: 20px;
+                align-items: center;
+                justify-content: center;
+                margin-top: 10px;
+            }
+        }
+
+    }
+
+   .footer-links {
+    display: none;
+   }
+   
+}
+
+@media screen and (min-width:768px) {
+
+    footer {
+        .section-footer {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            justify-content: space-around;
+            align-items: center;
+            margin: 0px;
+
+            .footer-logo {
+                img {
+                    width: 160px;
+                }
+            }
+
+            .footer-social-media {
+                margin-top: 0px;
+                p {
+                    font-size: 15px;
+                }
+    
+                .social-media-icons {
+                    display: flex;
+                    gap: 20px;
+                    align-items: center;
+                    justify-content: center;
+                    margin-top: 10px;
+                }
+            }
+        }
+
+        .footer-links {
+            display: block;
+            margin-top: 20px;
+        }
+    
+        .footer-links ul li {
+            list-style-type: none;
+            text-align: left;
+            margin: 10px 0 10px 0;
+    
+        }
+    
+        .footer-links ul li a {
+            text-decoration: none;
+            text-align: left;
+            color: white;
+        }
+
+        
+    }
+    
+}
+
+@media screen and (min-width:1200px) {
+
+    footer {
+        .section-footer {
+
+            .footer-logo {
+                img {
+                    width: 250px;
+                }
+            }
+
+            .footer-social-media {
+                margin-top: -50px;
+
+                p {
+                    font-size: 30px;
+                }
+    
+                .social-media-icons {
+                    display: flex;
+                    gap: 20px;
+                    align-items: center;
+                    justify-content: center;
+                    margin-top: 10px;
+                }
+            }
+        }
+
+        .footer-links {
+            display: block;
+            margin-top: 20px;
+        }
+    
+        .footer-links ul li {
+            list-style-type: none;
+            text-align: left;
+            margin: 10px 0 10px 0;
+    
+        }
+    
+        .footer-links ul li a {
+            font-size: 30px;
+        }
+
+        
+    }
+    
+}
