@@ -112,5 +112,49 @@ main {
 
 
 @media screen and (min-width: 768px) {
+    .statistic-boxes-container {
+        gap: 50px;
     
+        .box-statistics {
+            text-align: center;
+            width: 300px;
+            height: 280px;
+            border-radius: 30px;
+            padding: 30px;
+        
+            .box-statistics-heading {
+                font-size: 30px;
+                margin-bottom: 25px;
+                margin-top: 15px;
+            }
+    
+            .box-statistics-text {
+                font-size: 15px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .statistic-boxes-container {
+        gap: 30px;
+    
+        .box-statistics {
+            text-align: center;
+            width: 250px;
+            height: 280px;
+            border-radius: 30px;
+            padding: 20px;
+        
+            .box-statistics-heading {
+                font-size: 25px;
+                margin-bottom: 25px;
+                margin-top: 15px;
+            }
+    
+            .box-statistics-text {
+                font-size: 15px;
+            }
+        }
+    }
 }
