@@ -67,12 +67,17 @@
     const filmTemplate = document.querySelector("#film-template");
     const filmCon = document.querySelector("#film-con");
     const loader = document.querySelector("#loader");
+    const loader1 = document.querySelector("#loader1");
+
 
 
     function getCharacters() {
+        filmCon.innerHTML = "";
+        loader1.classList.remove("hidden");
         fetch(`${baseURL}people`)
         .then(response => response.json())
         .then(function(response) {
+            loader1.classList.add("hidden");
             console.log(response);
 
             const characters = response.results;
