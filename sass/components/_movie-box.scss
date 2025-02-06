@@ -1,6 +1,19 @@
 @use '../abstracts/variables' as v;
 
-#movie-box {
+.error {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
+#loader {
+    text-align: center;
+    align-items: center;
+    width: 40px;
+    margin: 0 auto;
+}
+
+#character-box {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -50,4 +63,54 @@
     &:hover {
         filter: sepia(20%) saturate(120%) brightness(105%) contrast(95%);
     }
+}
+
+#film-con {
+    width: 100%;
+    height: auto;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(6, 420px); 
+    gap: 20px; 
+    overflow-x: auto; 
+    overflow-y: hidden; 
+    padding-bottom: 10px; 
+    scroll-snap-type: x mandatory; 
+}
+
+#film-con::-webkit-scrollbar {
+    width: 8px; 
+}
+
+#film-con::-webkit-scrollbar-track {
+    background: #1c1325; 
+    border-radius: 10px;
+}
+
+#film-con::-webkit-scrollbar-thumb {
+    background-color: v.$secondary-color; 
+    border-radius: 10px; 
+}
+
+.film-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    text-align: left;
+    color: white;
+    width: 400px;
+    height: auto;
+    padding: 30px;
+}
+
+.film-title {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+.film-description {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
 }

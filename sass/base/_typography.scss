@@ -1,2 +1,9 @@
 @use '../abstracts/variables' as v;
 
+.characters-text {
+    align-items: center;
+    text-align: center;
+    color: v.$secondary-color;
+    font-size: 30px;
+    margin: 15px 0 30px 0;
+}
