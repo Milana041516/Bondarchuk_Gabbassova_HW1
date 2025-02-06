@@ -9,19 +9,31 @@
 #loader {
     text-align: center;
     align-items: center;
-    width: 40px;
+    width: 100px;
     margin: 0 auto;
+}
+
+#loader1 {
+    text-align: center;
+    align-items: center;
+    width: 100px;
+    margin: 0 auto;
+}
+
+.character-btn {
+    position: relative;
 }
 
 #character-box {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    gap: 50px; 
+    will-change: transform;
+    transition: transform .5s ease-in-out;
+    padding: 30px 0px 30px 30px;
 }
 
 .character {
-    width: 260px;
-    height: 400px;
+    min-width: 300px; 
     border: 3px solid v.$secondary-color;
     box-shadow: 0px 0px 10px v.$secondary-color;
     border-radius: 20px;
@@ -113,4 +125,10 @@
     font-weight: normal;
     font-size: 14px;
     line-height: 20px;
+}
+
+@media screen and (min-width:768px) {
+    #character-box {
+        gap: 100px; 
+    }
 }

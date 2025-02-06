@@ -10,7 +10,7 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-
+    <script defer src="js/slider.js"></script>
     <script defer src="js/main.js"></script>
 </head>
 <body>
@@ -45,23 +45,42 @@
             <h2 class="hidden">Banner Image</h2>
         </section>
 
-        <section id="characters" class="section-movies grid-con">
+        <section id="characters" class="section-movies">
             <h2 class="hidden">Characters & Movies</h2>
+            <div class="grid-con">
             <h3 class="col-span-full"><img class="heading" src="images/characters-text.svg" alt="heading"></h3>
             <p class="col-span-full characters-text">Tap a character to see their movie adventures!</p>
-            
 
-            <div id="character-box" class=" col-span-full">
+            <svg version="1.1" id="loader1" class="hidden col-span-full" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
+                enable-background="new 0 0 0 0" xml:space="preserve">
+                <path fill="#333"
+                    d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                    <animatetransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
+                        from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+                </path>
+            </svg>
+        </div>
+
+        <div class="character-btn">
+            <button id="prev-btn"><img src="images/prev-btn.svg" alt=""></button>
+            <button id="next-btn"><img src="images/next-btn.svg" alt=""></button>
+        </div>
+
+            <div id="slider-container">
+            <div id="character-box" class="slider-container col-span-full">
                 <!-- <div class="character">
                     <a href="#"><img src="images/1.jpg" alt="character-image"></a>
                     <p>Character Name</p>
                 </div> -->
             </div>
+        </div>
 
+
+        <div class="grid-con">
             <h3 class="col-span-full"><img class="heading" src="images/movies-text.svg" alt="heading"></h3>
             <p class="col-span-full characters-text">Your chosen character's movies will be displayed here!</p>
-
-
+        
             <svg version="1.1" id="loader" class="hidden col-span-full" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
                 enable-background="new 0 0 0 0" xml:space="preserve">
@@ -84,6 +103,8 @@
                     </section>
                 </template>
             </div>
+        </div>
+
         </section>
 
         <section id="statistics" class="section-statistics">
