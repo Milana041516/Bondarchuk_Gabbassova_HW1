@@ -42,8 +42,8 @@
             duration: 2,
             scrollTrigger: {
                 trigger: card,
-                start: "top 80%",
-                end: "top 30%",
+                start: "top 40%",
+                end: "top 40%",
                 toggleActions: "play none none reverse",
                 markers: false
             }
@@ -66,6 +66,8 @@
 
     const filmTemplate = document.querySelector("#film-template");
     const filmCon = document.querySelector("#film-con");
+    const loader = document.querySelector("#loader");
+
 
     function getCharacters() {
         fetch(`${baseURL}people`)
@@ -110,17 +112,26 @@
                 link.addEventListener("click", getMovies);
             })
         })
-        .catch()
+        .catch(error => {
+            console.log(error)
+            const errorMessage = document.createElement("p");
+            errorMessage.classList.add("error");
+            errorMessage.textContent = `Ooops, something went wrong. Please check your internet connection or try again later. Error Message ${error}`;
+            characterBox.appendChild(errorMessage);
+        })
     }
 
     function getMovies(e) {
         e.preventDefault();
-        const movieID = e.currentTarget.dataset.films;
+        filmCon.innerHTML = "";
+        loader.classList.toggle("hidden");
+        const films = e.currentTarget.dataset.films.split(",");
 
-        fetch(`${baseURL}films`)
+        films.forEach(filmURL => {
+        fetch(filmURL)
         .then(response => response.json())
         .then(function(response){
-            filmCon.innerHTML = "";
+        loader.classList.toggle("hidden");
             console.log(response);
             const clone = filmTemplate.content.cloneNode(true);
             const filmImg = clone.querySelector(".film-image");
@@ -128,13 +139,21 @@
             const filmDescription = clone.querySelector(".film-description");
 
             filmImg.src = `images/${response.episode_id}.png`;
-            filmTitle.innerHTML = response.results.title;
-            filmDescription.innerHTML = response.results.opening_crawl;
+            filmTitle.innerHTML = response.title;
+            filmDescription.innerHTML = response.opening_crawl;
 
             filmCon.appendChild(clone);
+            filmCon.scrollIntoView({behavior: 'smooth', block: 'start'});
+        })
+
+        
+        .catch(function(error) {
+            console.log(error);
+            filmCon.innerHTML = "<p>No movies available for this selection.</p>";
+        })
 
         })
-        .catch()
+
     }
 
     getCharacters();
