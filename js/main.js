@@ -124,14 +124,14 @@
     function getMovies(e) {
         e.preventDefault();
         filmCon.innerHTML = "";
-        loader.classList.toggle("hidden");
+        loader.classList.remove("hidden");
         const films = e.currentTarget.dataset.films.split(",");
 
         films.forEach(filmURL => {
         fetch(filmURL)
         .then(response => response.json())
         .then(function(response){
-        loader.classList.toggle("hidden");
+        loader.classList.add("hidden");
             console.log(response);
             const clone = filmTemplate.content.cloneNode(true);
             const filmImg = clone.querySelector(".film-image");
