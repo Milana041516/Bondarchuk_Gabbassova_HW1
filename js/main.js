@@ -69,61 +69,70 @@
     const loader = document.querySelector("#loader");
     const loader1 = document.querySelector("#loader1");
 
+    const searchBar = document.querySelector('#searchBar');
 
+    let characters = []; 
 
     function getCharacters() {
         filmCon.innerHTML = "";
         loader1.classList.remove("hidden");
         fetch(`${baseURL}people`)
-        .then(response => response.json())
-        .then(function(response) {
-            loader1.classList.add("hidden");
-            console.log(response);
+            .then(response => response.json())
+            .then(function (response) {
+                loader1.classList.add("hidden");
+                console.log(response);
 
-            const characters = response.results;
-
-            
-            characters.forEach(character => {
-                const characterDiv = document.createElement("div");
-                characterDiv.classList.add("character");
-
-                const a = document.createElement("a");
-
-                //get an ID from url for the images for characters
-                const img = document.createElement("img");
-                const parts = character.url.split("/");
-                const id = parts[parts.length - 2];
-
-                img.src = `images/${id}.jpg`;
-
-                // p tag(names of the characters)
-                const p = document.createElement("p");
-                p.textContent = character.name;
-
-                //a tag
-                a.dataset.films = character.films.join(",");
-
-                a.appendChild(img);
-                characterDiv.appendChild(a);
-                characterDiv.appendChild(p);
-                characterBox.appendChild(characterDiv);
-            });
-        })
-        .then(function() {
-            const links = document.querySelectorAll(".character a")
-            console.log(links);
-
-            links.forEach(function(link) {
-                link.addEventListener("click", getMovies);
+                characters = response.results; 
+                displayCharacters(characters);
             })
-        })
-        .catch(error => {
-            console.log(error)
-            const errorMessage = document.createElement("p");
-            errorMessage.classList.add("error");
-            errorMessage.textContent = `Ooops, something went wrong. Please check your internet connection or try again later. Error Message ${error}`;
-            characterBox.appendChild(errorMessage);
-        })
+            .catch(error => {
+                console.log(error);
+                const errorMessage = document.createElement("p");
+                errorMessage.classList.add("error");
+                errorMessage.textContent = `Ooops, something went wrong. Please check your internet connection or try again later. Error Message: ${error}`;
+                characterBox.appendChild(errorMessage);
+            });
+    }
+
+    function displayCharacters(characterList) {
+        characterBox.innerHTML = ""; 
+
+        characterList.forEach(character => {
+            const characterDiv = document.createElement("div");
+            characterDiv.classList.add("character");
+
+            const a = document.createElement("a");
+
+            const img = document.createElement("img");
+            const parts = character.url.split("/");
+            const id = parts[parts.length - 2];
+
+            img.src = `images/${id}.jpg`;
+            img.style.width = "300px"; 
+            img.style.height = "300px";
+            img.style.objectFit = "cover";
+            img.style.borderRadius = "20px";
+
+            const p = document.createElement("p");
+            p.textContent = character.name;
+
+            a.dataset.films = character.films.join(",");
+            a.appendChild(img);
+
+            characterDiv.appendChild(a);
+            characterDiv.appendChild(p);
+            characterBox.appendChild(characterDiv);
+        });
+
+        attachMovieListeners();
+    }
+
+    function attachMovieListeners() {
+        const links = document.querySelectorAll(".character a");
+
+        links.forEach(link => {
+            link.addEventListener("click", getMovies);
+        });
     }
 
     function getMovies(e) {
@@ -133,33 +142,37 @@
         const films = e.currentTarget.dataset.films.split(",");
 
         films.forEach(filmURL => {
-        fetch(filmURL)
-        .then(response => response.json())
-        .then(function(response){
-        loader.classList.add("hidden");
-            console.log(response);
-            const clone = filmTemplate.content.cloneNode(true);
-            const filmImg = clone.querySelector(".film-image");
-            const filmTitle = clone.querySelector(".film-title");
-            const filmDescription = clone.querySelector(".film-description");
+            fetch(filmURL)
+                .then(response => response.json())
+                .then(function (response) {
+                    loader.classList.add("hidden");
+                    console.log(response);
+                    const clone = filmTemplate.content.cloneNode(true);
+                    const filmImg = clone.querySelector(".film-image");
+                    const filmTitle = clone.querySelector(".film-title");
+                    const filmDescription = clone.querySelector(".film-description");
 
-            filmImg.src = `images/${response.episode_id}.png`;
-            filmTitle.innerHTML = response.title;
-            filmDescription.innerHTML = response.opening_crawl;
+                    filmImg.src = `images/${response.episode_id}.png`;
+                    filmTitle.innerHTML = response.title;
+                    filmDescription.innerHTML = response.opening_crawl;
 
-            filmCon.appendChild(clone);
-            filmCon.scrollIntoView({behavior: 'smooth', block: 'start'});
-        })
-
-        
-        .catch(function(error) {
-            console.log(error);
-            filmCon.innerHTML = "<p>No movies available for this selection.</p>";
-        })
-
-        })
-
+                    filmCon.appendChild(clone);
+                    filmCon.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    filmCon.innerHTML = "<p>No movies available for this selection.</p>";
+                });
+        });
     }
+
+    searchBar.addEventListener("input", () => {
+        const query = searchBar.value.toLowerCase();
+        const filteredCharacters = characters.filter(character =>
+            character.name.toLowerCase().includes(query)
+        );
+        displayCharacters(filteredCharacters);
+    });
 
     getCharacters();
 })();
