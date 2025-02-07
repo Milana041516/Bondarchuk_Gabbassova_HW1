@@ -2,14 +2,14 @@
     const prevBtn = document.querySelector('#prev-btn');
     const nextBtn = document.querySelector('#next-btn');
     const slider = document.querySelector('.slider-container');
+    const slides = document.querySelectorAll('.character');
 
+    let slidesToShow = 1;
     let slideWidth = slider.clientWidth;
     let currentIndex = 0;
 
     function prevSlide() {
         currentIndex--;
-        // the same as the above one but with less words currentIndex = currentIndex -1;
-
         if (currentIndex < 0) {
             currentIndex = slider.children.length - 1;
         }
@@ -27,8 +27,19 @@
         showSlide(currentIndex);
     }
 
+    function getSlidesToShow() {
+        if (window.innerWidth >= 1200) {
+            return 3; 
+        } else if (window.innerWidth >= 768) {
+            return 2; 
+        } else {
+            return 1; 
+        }
+    }
+
     function updateSlideWidth() {
-        slideWidth = slider.clientWidth;
+        slidesToShow = getSlidesToShow();
+        slideWidth = slider.clientWidth / slidesToShow;
         showSlide(currentIndex);
     }
 
@@ -43,4 +54,5 @@
     nextBtn.addEventListener('click', nextSlide);
     window.addEventListener('resize', updateSlideWidth);
 
+    updateSlideWidth();
 })();
